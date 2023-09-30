@@ -1,0 +1,15 @@
+--- ntopng-5.6/configure.ac.in~	2023-02-02 14:33:21.000000000 +0100
++++ ntopng-5.6/configure.ac.in	2023-09-30 22:50:02.598826486 +0200
+@@ -753,11 +753,7 @@
+   INSTALL_DIR=${ac_default_prefix}
+ fi
+ 
+-if test $SYSTEM = "Darwin"; then
+-  MAN_DIR=$INSTALL_DIR/share/man
+-else
+-  MAN_DIR=$INSTALL_DIR/man
+-fi
++MAN_DIR=$INSTALL_DIR/share/man
+ 
+ if test $SYSTEM = "OpenBSD"; then
+   INSTALL_DIR=${prefix}
