@@ -11,6 +11,7 @@ Source0:	https://github.com/ntop/ntopng/archive/%{version}/%{name}-%{version}.ta
 Source1:	https://github.com/ntop/nDPI/archive/%{ndpi_ver}/nDPI-%{ndpi_ver}.tar.gz
 # Source1-md5:	1803f5f3999e1dc3a2454d437b11e9ba
 Patch0:		mandir.patch
+Patch1:		x32.patch
 URL:		http://www.ntop.org/
 BuildRequires:	GeoIP-devel
 BuildRequires:	autoconf >= 2.52
@@ -55,6 +56,7 @@ It is the new incarnation of the original ntop written in
 %patch0 -p1
 
 %{__mv} nDPI-%{ndpi_ver} nDPI
+%patch1 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!/bin/bash\1,' \
       httpdocs/misc/ntopng-utils-manage-config.in \

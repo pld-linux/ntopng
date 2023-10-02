@@ -1,0 +1,11 @@
+--- ntopng-5.6/nDPI/src/lib/third_party/src/roaring.cc.orig	2023-02-01 18:29:59.000000000 +0100
++++ ntopng-5.6/nDPI/src/lib/third_party/src/roaring.cc	2023-10-02 05:27:14.540262993 +0200
+@@ -315,7 +315,7 @@
+ 
+ 
+ 
+-#if defined(__x86_64__) || defined(_M_X64)
++#if (defined(__x86_64__) && !defined(__ILP32__)) || defined(_M_X64)
+ // we have an x64 processor
+ #define CROARING_IS_X64
+ 
