@@ -1,32 +1,41 @@
-%define		ndpi_ver	4.6
+%define		ndpi_ver	4.8
 Summary:	Network monitoring tool
 Summary(pl.UTF-8):	Narzędzie do monitorowania sieci
 Name:		ntopng
-Version:	5.6
+Version:	6.0
 Release:	1
 License:	GPL v3+
 Group:		Networking
+#Source0Download: https://github.com/ntop/ntopng/releases
 Source0:	https://github.com/ntop/ntopng/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	2235c42d3a6f135ab0b9ffb200a2070b
+# Source0-md5:	a6f2a09a3114841ea020b23de6db9081
+#Source1Download: https://github.com/ntop/nDPI/releases
 Source1:	https://github.com/ntop/nDPI/archive/%{ndpi_ver}/nDPI-%{ndpi_ver}.tar.gz
-# Source1-md5:	1803f5f3999e1dc3a2454d437b11e9ba
+# Source1-md5:	41a5437fa7d274f59f852b17b776558f
 Patch0:		mandir.patch
 Patch1:		x32.patch
-URL:		http://www.ntop.org/
-BuildRequires:	GeoIP-devel
+URL:		https://www.ntop.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake >= 1.6
-BuildRequires:	gawk
-BuildRequires:	gdbm-devel >= 1.8.3
+BuildRequires:	json-c-devel
+BuildRequires:	hiredis-devel
+BuildRequires:	libatomic-devel
+BuildRequires:	libmaxminddb-devel
 BuildRequires:	libpcap-devel
-BuildRequires:	libtool
+BuildRequires:	libstdc++-devel
+BuildRequires:	libtool >= 2:2
+BuildRequires:	mysql-devel
 BuildRequires:	net-snmp-devel
 BuildRequires:	openssl-devel >= 0.9.7d
 BuildRequires:	perl-devel
+BuildRequires:	pkgconfig
+BuildRequires:	radcli-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	rrdtool-devel >= 1.1.0
 BuildRequires:	sed >= 4.0
+BuildRequires:	sqlite3-devel >= 3
+BuildRequires:	zeromq-devel >= 3
 BuildRequires:	zlib-devel
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
@@ -48,8 +57,15 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 ntopng is a web-based network traffic monitoring application.
-It is the new incarnation of the original ntop written in
-1998, and now revamped in terms of performance, usability, and features.
+
+It is the new incarnation of the original ntop written in 1998, and
+now revamped in terms of performance, usability, and features.
+
+%description -l pl.UTF-8
+ntopng to oparta na WWW aplikacja do monitorowania ruchu sieciowego.
+
+Jest to nowa inkarnacja oryginalnego ntopa, napisanego w 1998, teraz
+zmodernizowana z myślą o wydajności, używalności i możliwościach.
 
 %prep
 %setup -q -a1
@@ -59,8 +75,8 @@ It is the new incarnation of the original ntop written in
 %patch1 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!/bin/bash\1,' \
-      httpdocs/misc/ntopng-utils-manage-config.in \
-      httpdocs/misc/ntopng-utils-manage-updates.in
+	httpdocs/misc/ntopng-utils-manage-config.in \
+	httpdocs/misc/ntopng-utils-manage-updates.in
 
 %build
 cd nDPI
