@@ -69,10 +69,10 @@ zmodernizowana z myślą o wydajności, używalności i możliwościach.
 
 %prep
 %setup -q -a1
-%patch0 -p1
+%patch -P0 -p1
 
 %{__mv} nDPI-%{ndpi_ver} nDPI
-%patch1 -p1
+%patch -P1 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!/bin/bash\1,' \
 	httpdocs/misc/ntopng-utils-manage-config.in \
