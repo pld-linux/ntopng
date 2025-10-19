@@ -1,8 +1,19 @@
---- ntopng-6.0/nDPI/src/lib/third_party/src/roaring.c.orig	2024-06-24 22:19:51.942871669 +0200
-+++ ntopng-6.0/nDPI/src/lib/third_party/src/roaring.c	2024-06-24 22:33:52.091653525 +0200
+--- ntopng-6.0/nDPI/src/lib/third_party/src/roaring_v2.c.orig	2024-06-24 22:19:51.942871669 +0200
++++ ntopng-6.0/nDPI/src/lib/third_party/src/roaring_v2.c	2024-06-24 22:33:52.091653525 +0200
 @@ -138,7 +138,7 @@ extern "C" {  // portability definitions
  
  
+ 
+-#if defined(__x86_64__) || defined(_M_X64)
++#if (defined(__x86_64__) && !defined(__ILP32__)) || defined(_M_X64)
+ // we have an x64 processor
+ #define CROARING_IS_X64 1
+ 
+--- ntopng-6.4/nDPI/src/lib/third_party/include/roaring.h~	2025-04-28 08:58:26.000000000 +0200
++++ ntopng-6.4/nDPI/src/lib/third_party/include/roaring.h	2025-10-19 17:43:47.863327950 +0200
+@@ -273,7 +273,7 @@
+ #endif  // __restrict__
+ #endif  // CROARING_REGULAR_VISUAL_STUDIO
  
 -#if defined(__x86_64__) || defined(_M_X64)
 +#if (defined(__x86_64__) && !defined(__ILP32__)) || defined(_M_X64)
