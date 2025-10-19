@@ -1,17 +1,17 @@
-%define		ndpi_ver	4.8
+%define		ndpi_ver	4.14
 Summary:	Network monitoring tool
 Summary(pl.UTF-8):	Narzędzie do monitorowania sieci
 Name:		ntopng
-Version:	6.0
-Release:	1
+Version:	6.4
+Release:	0.1
 License:	GPL v3+
 Group:		Networking
 #Source0Download: https://github.com/ntop/ntopng/releases
 Source0:	https://github.com/ntop/ntopng/archive/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	a6f2a09a3114841ea020b23de6db9081
+# Source0-md5:	d47e6635e8e5624206eea34e9b4b757f
 #Source1Download: https://github.com/ntop/nDPI/releases
 Source1:	https://github.com/ntop/nDPI/archive/%{ndpi_ver}/nDPI-%{ndpi_ver}.tar.gz
-# Source1-md5:	41a5437fa7d274f59f852b17b776558f
+# Source1-md5:	4b45ec47040ea781e78568d0e23438d4
 Patch0:		mandir.patch
 Patch1:		x32.patch
 URL:		https://www.ntop.org/
@@ -72,7 +72,7 @@ zmodernizowana z myślą o wydajności, używalności i możliwościach.
 %patch -P0 -p1
 
 %{__mv} nDPI-%{ndpi_ver} nDPI
-%patch -P1 -p1
+#patch -P1 -p1
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!/bin/bash\1,' \
 	httpdocs/misc/ntopng-utils-manage-config.in \
