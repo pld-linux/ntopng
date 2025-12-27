@@ -3,7 +3,7 @@ Summary:	Network monitoring tool
 Summary(pl.UTF-8):	Narzędzie do monitorowania sieci
 Name:		ntopng
 Version:	6.4
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Networking
 #Source0Download: https://github.com/ntop/ntopng/releases
